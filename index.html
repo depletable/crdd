@@ -400,90 +400,64 @@
  });
  </script>
 
- <script>
- const audio = document.getElementById('audio');
- const playPauseBtn = document.getElementById('playPauseBtn');
- const playPauseIcon = document.getElementById('playPauseIcon');
- const trackTitle = document.getElementById('track-title');
- const trackArtist = document.getElementById('track-artist');
- const seekBar = document.getElementById('seekBar');
+<script>
+const audio = document.getElementById('audio');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const playPauseIcon = document.getElementById('playPauseIcon');
+const trackTitle = document.getElementById('track-title');
+const trackArtist = document.getElementById('track-artist');
+const seekBar = document.getElementById('seekBar');
 
- const song = {
+const song = {
   title: "Lazy Boy and the Temple of Wonders",
   artist: "Weedpecker",
   url: "assets/lazyboyweedpecker.mp3"
 };
 
- audio.src = song.url;
- trackTitle.textContent = song.title;
- trackArtist.textContent = song.artist;
+// Set initial text
+trackTitle.textContent = song.title;
+trackArtist.textContent = song.artist;
 
- let isPlaying = false;
+// Load audio
+audio.src = song.url;
+audio.load();
 
- playPauseBtn.addEventListener('click', () => {
- playPauseIcon.style.opacity = 0;
+let isPlaying = false;
 
- setTimeout(() => {
- if (isPlaying) {
- audio.pause();
- playPauseIcon.src = "assets/play.png";
- } else {
- audio.play();
- playPauseIcon.src = "assets/pause.png";
- }
+// Play/pause logic
+playPauseBtn.addEventListener('click', () => {
+  playPauseIcon.style.opacity = 0;
 
- isPlaying = !isPlaying;
- playPauseIcon.style.opacity = 1;
- }, 200);
- });
+  setTimeout(() => {
+    if (isPlaying) {
+      audio.pause();
+      playPauseIcon.src = "assets/play.png";
+    } else {
+      audio.play().catch(err => console.error("Playback failed:", err));
+      playPauseIcon.src = "assets/pause.png";
+    }
 
- // Update the seek bar as the song plays
- audio.addEventListener('timeupdate', () => {
- if (!isNaN(audio.duration)) {
- seekBar.max = audio.duration;
- seekBar.value = audio.currentTime;
- }
- });
+    isPlaying = !isPlaying;
+    playPauseIcon.style.opacity = 1;
+  }, 200);
+});
 
- // Allow user to seek in audio
- seekBar.addEventListener('input', () => {
- audio.currentTime = seekBar.value;
- });
-
- // Custom fill logic for the seek bar
-function updateSeekBarFill() {
- const fillPercent = (audio.currentTime / audio.duration) * 100;
- seekBar.style.setProperty('--seek-fill', `${fillPercent}%`);
- seekBar.style.setProperty('--seek-width', `${fillPercent}%`);
- seekBar.querySelector('::before');
- seekBar.style.setProperty('--fill-width', `${fillPercent}%`);
- seekBar.style.setProperty('--webkitProgressPercent', fillPercent);
- seekBar.style.setProperty('--mozProgressPercent', fillPercent);
- seekBar.style.setProperty('--oProgressPercent', fillPercent);
- seekBar.style.setProperty('--msProgressPercent', fillPercent);
-
- // Direct DOM manipulation to style ::before
- seekBar.style.setProperty('--fill-width', `${fillPercent}%`);
- seekBar.style.setProperty('--progress', `${fillPercent}%`);
- seekBar.style.setProperty('--webkitProgressPercent', `${fillPercent}%`);
-
- // Fallback
- seekBar.style.setProperty('background', `linear-gradient(90deg, #73eaff ${fillPercent}%, #444 ${fillPercent}%)`);
-}
-
-// Update the visual fill while playing
+// Update seek bar as song plays
 audio.addEventListener('timeupdate', () => {
- seekBar.max = audio.duration;
- seekBar.value = audio.currentTime;
- const fillPercent = (audio.currentTime / audio.duration) * 100;
- seekBar.style.setProperty('--fill-width', `${fillPercent}%`);
- seekBar.style.background = `linear-gradient(to right, #444 ${fillPercent}%, #2a2a2a ${fillPercent}%)`;
+  if (!isNaN(audio.duration)) {
+    seekBar.max = audio.duration;
+    seekBar.value = audio.currentTime;
+
+    const fillPercent = (audio.currentTime / audio.duration) * 100;
+    seekBar.style.background = `linear-gradient(to right, #73eaff ${fillPercent}%, #444 ${fillPercent}%)`;
+  }
 });
 
+// Seek logic
 seekBar.addEventListener('input', () => {
- audio.currentTime = seekBar.value;
+  audio.currentTime = seekBar.value;
 });
- </script>
+</script>
 
 </body>
 </html>
