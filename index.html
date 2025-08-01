@@ -449,7 +449,7 @@ audio.addEventListener('timeupdate', () => {
     seekBar.value = audio.currentTime;
 
     const fillPercent = (audio.currentTime / audio.duration) * 100;
-    seekBar.style.background = `linear-gradient(to right, #73eaff ${fillPercent}%, #444 ${fillPercent}%)`;
+    seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
   }
 });
 
