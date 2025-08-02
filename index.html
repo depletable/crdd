@@ -64,19 +64,24 @@
  border: 4px solid rgba(255, 255, 255, 0.9);
  }
 
-  .pfp-border {
-  background: linear-gradient(135deg, #FFFFFF, #FFF8AD, #FFCCB0, #FFFFFF, #FFF8AD, #FFCCB0); /* 🎨 gradient colors */
-  padding: 4px; /* thickness of the border */
-  border-radius: 50%; /* makes the border circular */
-  display: inline-block;
+ .pfp-border {
+  width: 108px; /* image size (100px) + 2 * padding (4px) */
+  height: 108px;
+  padding: 4px;
+  background: linear-gradient(135deg, #FFFFFF, #FFF8AD, #FFCCB0, #FFFFFF, #FFF8AD, #FFCCB0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .pfp {
-  display: block;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
+  display: block;
 }
 
  .name {
