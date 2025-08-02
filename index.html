@@ -186,7 +186,7 @@
   margin-bottom: -1px;
 }
 
- #seekBar {
+#seekBar {
  -webkit-appearance: none;
  width: 100%;
  height: 4px;
@@ -325,10 +325,37 @@
   }
 }
 
+/* New overlay styles */
+#blurOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(17, 17, 17, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+  user-select: none;
+}
+
+#enterText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: white;
+  text-transform: lowercase;
+  letter-spacing: 3px;
+}
  </style>
 </head>
 
 <body>
+
+<!-- Blur overlay with "enter" text -->
+<div id="blurOverlay">
+  <div id="enterText">enter</div>
+</div>
 
  <div class="card-wrapper" id="cardWrapper">
  <div class="card" id="card">
@@ -475,6 +502,18 @@ audio.addEventListener('timeupdate', () => {
 
 seekBar.addEventListener('input', () => {
   audio.currentTime = seekBar.value;
+});
+</script>
+
+<script>
+const blurOverlay = document.getElementById('blurOverlay');
+
+blurOverlay.addEventListener('click', () => {
+  blurOverlay.style.opacity = '0';
+  blurOverlay.style.transition = 'opacity 0.5s ease';
+  setTimeout(() => {
+    blurOverlay.style.display = 'none';
+  }, 500);
 });
 </script>
 
