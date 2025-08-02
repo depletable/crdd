@@ -65,7 +65,13 @@
  font-size: 35px;
  font-weight: 600;
  margin-left: 5px;
- color: #fff;
+ background: linear-gradient(135deg, #FFFFFF, #FFF8AD, #FFCCB0, #FFFFFF, #FFF8AD, #FFCCB0);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: borderScroll 3s ease-in-out infinite alternate;
  }
 
  .description {
@@ -265,8 +271,6 @@
   gap: 15px;
   margin-top: 25px;
   margin-left: 5px;
-  background: rgba(255, 236, 224, 0.9)
-  border-radius: 12px
   opacity: 0.2;
 }
 
@@ -410,10 +414,10 @@
 
  <div class="social-logos">
   <a href="https://instagram.com/zccmu" target="_blank">
-    <img src="assets/iglogo.png" style="filter: invert(1);" alt="Instagram" class="social-icon" />
+    <img src="assets/iglogo.png" alt="Instagram" class="social-icon" />
   </a>
   <a href="https://last.fm/user/crsttt" target="_blank">
-    <img src="assets/lastfmlogo.png" style="filter: invert(1);" alt="Last.fm" class="social-icon" />
+    <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
   </a>
 </div>
 
