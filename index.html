@@ -64,6 +64,21 @@
  border: 4px solid rgba(255, 255, 255, 0.9);
  }
 
+  .pfp-border {
+  background: linear-gradient(135deg, #FFFFFF, #FFF8AD, #FFCCB0, #FFFFFF, #FFF8AD, #FFCCB0); /* 🎨 gradient colors */
+  padding: 4px; /* thickness of the border */
+  border-radius: 50%; /* makes the border circular */
+  display: inline-block;
+}
+
+.pfp {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
  .name {
  font-size: 35px;
  font-weight: 600;
@@ -276,7 +291,7 @@
   gap: 15px;
   margin-top: 25px;
   margin-left: 5px;
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 .social-icon {
@@ -371,7 +386,9 @@
 
  <div class="card-wrapper" id="cardWrapper">
  <div class="card" id="card">
+  <div class="pfp-border">
   <img src="assets/05dbc15d63cecdd914dfaa52eb0405d5.webp" alt="pfp" class="profile-pic" id="profilePic"/>
+  </div>
  <div style="display: flex; align-items: center;">
  <div class="name" id="profileName">zc</div>
  <div class="badge-container">
