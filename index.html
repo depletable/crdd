@@ -21,7 +21,7 @@
  .card-wrapper {
  padding: 4px;
  border-radius: 24px;
- background: linear-gradient(135deg, #222222, #222222); /* gradient border */
+ background: linear-gradient(135deg, #222222, #222222);
  background-size: 200% 200%;
  animation: borderScroll 3s ease-in-out infinite alternate;
  display: inline-block;
@@ -156,14 +156,6 @@
  align-items: center;
  }
 
- .time-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: -4px;
-  margin-bottom: 4px;
-
  .controls button {
  background: transparent;
  border: none;
@@ -185,11 +177,20 @@
  transition: opacity 0.25s ease;
  }
 
+ .time-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: -4px;
+  margin-bottom: 4px;
+}
+
  #seekBar {
  -webkit-appearance: none;
  width: 100%;
  height: 4px;
- background: rgba(255, 255, 255, 0.165); /* darker gray background */
+ background: rgba(255, 255, 255, 0.165);
  border-radius: 10px;
  position: relative;
  cursor: pointer;
@@ -197,7 +198,6 @@
  transition: height 0.2s ease;
 }
 
-/* Remove the default thumb */
 #seekBar::-webkit-slider-thumb {
  -webkit-appearance: none;
  appearance: none;
@@ -211,7 +211,7 @@
  content: '';
  position: absolute;
  height: 100%;
- background: rgba(255, 255, 255, 0.267); /* slightly lighter gray than background */
+ background: rgba(255, 255, 255, 0.267);
  width: 0%;
  z-index: 1;
  transition: width 0.1s linear;
@@ -243,7 +243,7 @@
  bottom: -2px;
  z-index: -1;
  border-radius: 18px;
- background: linear-gradient(135deg, #FF0077, #FFF200, #6BFFDA, #4564FF, #D000FF, #FF0077, #FFF200, #6BFFDA, #4564FF, #D000FF); /* gradient badge border */
+ background: linear-gradient(135deg, #FF0077, #FFF200, #6BFFDA, #4564FF, #D000FF, #FF0077, #FFF200, #6BFFDA, #4564FF, #D000FF);
  background-size: 200% 200%;
  animation: borderScroll 3s ease-in-out infinite alternate;
 }
@@ -284,7 +284,7 @@
 
 @media (max-width: 480px) {
   .card {
-    width: 90vw; /* use 90% of the viewport width */
+    width: 90vw;
     padding: 20px;
   }
 
@@ -332,12 +332,7 @@
 
  <div class="card-wrapper" id="cardWrapper">
  <div class="card" id="card">
-  <img 
-   src="assets/05dbc15d63cecdd914dfaa52eb0405d5.webp" 
-   alt="pfp" 
-   class="profile-pic" 
-   id="profilePic"
-  />
+  <img src="assets/05dbc15d63cecdd914dfaa52eb0405d5.webp" alt="pfp" class="profile-pic" id="profilePic"/>
  <div style="display: flex; align-items: center;">
  <div class="name" id="profileName">zc</div>
  <div class="badge-container">
@@ -345,7 +340,6 @@
  <img src="assets/dev.png" alt="dev">
  <img src="assets/pencil.png" alt="artist">
  <img src="assets/trophy.png" alt="artist">
- <!-- You can add more badges here -->
  </div>
 </div>
  <div class="description" id="profileDescription">
@@ -372,30 +366,34 @@
         <button id="playPauseBtn">
         <img id="playPauseIcon" src="assets/play.png" alt="Play" />
         </button>
-        </div>
-       <div class="time-info">
-  <span id="currentTime">0:00</span>
-  <span id="totalDuration">0:00</span>
-</div>
-<input type="range" id="seekBar" value="0" min="0" step="1">
-        <audio id="audio" src="assets/lazyboyweedpecker.mp3"></audio>
-      </div>
-    <div class="social-logos">
-  <a href="https://instagram.com/zccmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    </div>
+
+    <!-- Time labels -->
+    <div class="time-info">
+      <span id="currentTime">0:00</span>
+      <span id="totalDuration">0:00</span>
+    </div>
+
+    <input type="range" id="seekBar" value="0" min="0" step="1">
+    <audio id="audio" src="assets/lazyboyweedpecker.mp3"></audio>
+ </div>
+
+ <div class="social-logos">
+  <a href="https://instagram.com/zccmu" target="_blank">
     <img src="assets/iglogo.png" alt="Instagram" class="social-icon" />
   </a>
-  <a href="https://last.fm/user/crsttt" target="_blank" rel="noopener noreferrer" aria-label="Last.fm">
+  <a href="https://last.fm/user/crsttt" target="_blank">
     <img src="assets/lastfmlogo.png" alt="Last.fm" class="social-icon" />
   </a>
 </div>
+
 </div>
-  </div>
-  
+</div>
 
- <script>
- const wrapper = document.getElementById('cardWrapper');
+<script>
+const wrapper = document.getElementById('cardWrapper');
 
- wrapper.addEventListener('mousemove', (e) => {
+wrapper.addEventListener('mousemove', (e) => {
  const rect = wrapper.getBoundingClientRect();
  const x = e.clientX - rect.left;
  const y = e.clientY - rect.top;
@@ -407,12 +405,12 @@
  const rotateY = ((x - centerX) / centerX) * 8;
 
  wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
- });
+});
 
- wrapper.addEventListener('mouseleave', () => {
+wrapper.addEventListener('mouseleave', () => {
  wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
- });
- </script>
+});
+</script>
 
 <script>
 const audio = document.getElementById('audio');
@@ -421,20 +419,8 @@ const playPauseIcon = document.getElementById('playPauseIcon');
 const trackTitle = document.getElementById('track-title');
 const trackArtist = document.getElementById('track-artist');
 const seekBar = document.getElementById('seekBar');
-
- const currentTimeDisplay = document.getElementById('currentTime');
+const currentTimeDisplay = document.getElementById('currentTime');
 const totalDurationDisplay = document.getElementById('totalDuration');
-
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-  return `${mins}:${secs}`;
-}
-
-audio.addEventListener('loadedmetadata', () => {
-  totalDurationDisplay.textContent = formatTime(audio.duration);
-});
-
 
 const song = {
   title: "Lazy Boy and the Temple of Wonders",
@@ -442,17 +428,13 @@ const song = {
   url: "assets/lazyboyweedpecker.mp3"
 };
 
-// Set initial text
 trackTitle.textContent = song.title;
 trackArtist.textContent = song.artist;
-
-// Load audio
 audio.src = song.url;
 audio.load();
 
 let isPlaying = false;
 
-// Play/pause logic
 playPauseBtn.addEventListener('click', () => {
   playPauseIcon.style.opacity = 0;
 
@@ -470,22 +452,14 @@ playPauseBtn.addEventListener('click', () => {
   }, 200);
 });
 
-// Update seek bar as song plays
-audio.addEventListener('timeupdate', () => {
-  if (!isNaN(audio.duration)) {
-    seekBar.max = audio.duration;
-    seekBar.value = audio.currentTime;
-const currentTimeEl = document.getElementById('currentTime');
-const totalDurationEl = document.getElementById('totalDuration');
-
 function formatTime(seconds) {
   const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+  return `${mins}:${secs}`;
 }
 
 audio.addEventListener('loadedmetadata', () => {
-  totalDurationEl.textContent = formatTime(audio.duration);
+  totalDurationDisplay.textContent = formatTime(audio.duration);
 });
 
 audio.addEventListener('timeupdate', () => {
@@ -499,16 +473,6 @@ audio.addEventListener('timeupdate', () => {
   }
 });
 
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-  }
-});
-
-    const fillPercent = (audio.currentTime / audio.duration) * 100;
-    seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
-  }
-});
-
-// Seek logic
 seekBar.addEventListener('input', () => {
   audio.currentTime = seekBar.value;
 });
