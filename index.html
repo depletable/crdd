@@ -156,6 +156,18 @@
  align-items: center;
  }
 
+ .time-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: -6px;
+  margin-bottom: 4px;
+  padding: 0 2px;
+  font-family: 'Poppins', sans-serif;
+}
+
  .controls button {
  background: transparent;
  border: none;
@@ -365,7 +377,11 @@
         <img id="playPauseIcon" src="assets/play.png" alt="Play" />
         </button>
         </div>
-        <input type="range" id="seekBar" value="0" min="0" step="1">
+       <div class="time-info">
+  <span id="currentTime">0:00</span>
+  <span id="totalDuration">0:00</span>
+</div>
+<input type="range" id="seekBar" value="0" min="0" step="1">
         <audio id="audio" src="assets/lazyboyweedpecker.mp3"></audio>
       </div>
     <div class="social-logos">
@@ -449,6 +465,30 @@ audio.addEventListener('timeupdate', () => {
   if (!isNaN(audio.duration)) {
     seekBar.max = audio.duration;
     seekBar.value = audio.currentTime;
+const currentTimeEl = document.getElementById('currentTime');
+const totalDurationEl = document.getElementById('totalDuration');
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+audio.addEventListener('loadedmetadata', () => {
+  totalDurationEl.textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener('timeupdate', () => {
+  if (!isNaN(audio.duration)) {
+    seekBar.max = audio.duration;
+    seekBar.value = audio.currentTime;
+
+    const fillPercent = (audio.currentTime / audio.duration) * 100;
+    seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
+
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+  }
+});
 
     const fillPercent = (audio.currentTime / audio.duration) * 100;
     seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
