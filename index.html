@@ -159,14 +159,10 @@
  .time-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: -6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: -4px;
   margin-bottom: 4px;
-  padding: 0 2px;
-  font-family: 'Poppins', sans-serif;
-}
 
  .controls button {
  background: transparent;
@@ -426,6 +422,20 @@ const trackTitle = document.getElementById('track-title');
 const trackArtist = document.getElementById('track-artist');
 const seekBar = document.getElementById('seekBar');
 
+ const currentTimeDisplay = document.getElementById('currentTime');
+const totalDurationDisplay = document.getElementById('totalDuration');
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+  return `${mins}:${secs}`;
+}
+
+audio.addEventListener('loadedmetadata', () => {
+  totalDurationDisplay.textContent = formatTime(audio.duration);
+});
+
+
 const song = {
   title: "Lazy Boy and the Temple of Wonders",
   artist: "Weedpecker",
@@ -482,9 +492,12 @@ audio.addEventListener('timeupdate', () => {
   if (!isNaN(audio.duration)) {
     seekBar.max = audio.duration;
     seekBar.value = audio.currentTime;
+    currentTimeDisplay.textContent = formatTime(audio.currentTime);
 
     const fillPercent = (audio.currentTime / audio.duration) * 100;
     seekBar.style.background = `linear-gradient(to right, rgba(255, 255, 255, 0.267) ${fillPercent}%, rgba(255, 255, 255, 0.165) ${fillPercent}%)`;
+  }
+});
 
     currentTimeEl.textContent = formatTime(audio.currentTime);
   }
